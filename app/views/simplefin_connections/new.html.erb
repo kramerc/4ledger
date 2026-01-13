@@ -1,0 +1,29 @@
+<h1>Connect to Simplefin</h1>
+<p><a href="https://beta-bridge.simplefin.org/simplefin/create">Create a new connection</a> on Simplefin under "Apps" in "My Account" and then paste the setup token here:</p>
+<%= form_with model: @simplefin_connection, url: simplefin_connection_path, method: :post, local: true, data: { controller: "toggle-field" } do |form| %>
+  <% if @simplefin_connection.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@simplefin_connection.errors.count, "error") %> prohibited this Simplefin connection from being saved:</h2>
+
+      <ul>
+        <% @simplefin_connection.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :setup_token %><br>
+    <%= form.text_area :setup_token, data: { toggle_field_target: "field" } %>
+  </div>
+
+  <div class="field">
+    <%= form.check_box :demo, data: { toggle_field_target: "checkbox", action: "change->toggle-field#toggle" } %>
+    <%= form.label :demo, "Use demo token with sample data" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Connect to Simplefin" %>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  simplefin_account: one
+  remote_id: MyString
+  posted: 2026-01-13 06:20:38
+  amount: MyString
+  description: MyString
+  transacted_at: 2026-01-13 06:20:38
+  pending: false
+  extra: 
+
+two:
+  simplefin_account: two
+  remote_id: MyString
+  posted: 2026-01-13 06:20:38
+  amount: MyString
+  description: MyString
+  transacted_at: 2026-01-13 06:20:38
+  pending: false
+  extra: 

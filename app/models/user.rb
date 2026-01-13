@@ -6,5 +6,5 @@ class User < ApplicationRecord
          :trackable
 
   has_many :accounts, dependent: :destroy
-  has_many :simplefin_connections, dependent: :destroy
+  has_one :simplefin_connection, dependent: :destroy
 end

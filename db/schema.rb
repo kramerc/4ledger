@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_13_043307) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_13_073016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,12 +24,45 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_13_043307) do
     t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
+  create_table "simplefin_accounts", force: :cascade do |t|
+    t.bigint "account_id"
+    t.string "available_balance"
+    t.string "balance"
+    t.datetime "balance_date", precision: nil
+    t.datetime "created_at", null: false
+    t.string "currency"
+    t.jsonb "extra"
+    t.string "name"
+    t.jsonb "org"
+    t.string "remote_id"
+    t.bigint "simplefin_connection_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_simplefin_accounts_on_account_id", unique: true
+    t.index ["simplefin_connection_id"], name: "index_simplefin_accounts_on_simplefin_connection_id"
+  end
+
   create_table "simplefin_connections", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.datetime "refreshed_at", precision: nil
     t.datetime "updated_at", null: false
     t.string "url"
     t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_simplefin_connections_on_user_id"
+    t.index ["refreshed_at"], name: "index_simplefin_connections_on_refreshed_at"
+    t.index ["user_id"], name: "index_simplefin_connections_on_user_id", unique: true
+  end
+
+  create_table "simplefin_transactions", force: :cascade do |t|
+    t.string "amount"
+    t.datetime "created_at", null: false
+    t.string "description"
+    t.jsonb "extra"
+    t.boolean "pending"
+    t.datetime "posted", precision: nil
+    t.string "remote_id"
+    t.bigint "simplefin_account_id", null: false
+    t.datetime "transacted_at", precision: nil
+    t.datetime "updated_at", null: false
+    t.index ["simplefin_account_id"], name: "index_simplefin_transactions_on_simplefin_account_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,5 +83,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_13_043307) do
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "simplefin_accounts", "accounts"
+  add_foreign_key "simplefin_accounts", "simplefin_connections"
   add_foreign_key "simplefin_connections", "users"
+  add_foreign_key "simplefin_transactions", "simplefin_accounts"
 end

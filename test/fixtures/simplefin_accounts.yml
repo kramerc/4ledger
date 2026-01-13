@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  simplefin_connection: one
+  remote_id: MyString
+  org: 
+  name: MyString
+  currency: MyString
+  balance: MyString
+  available_balance: MyString
+  balance_date: 2026-01-13 05:53:24
+
+two:
+  simplefin_connection: two
+  remote_id: MyString
+  org: 
+  name: MyString
+  currency: MyString
+  balance: MyString
+  available_balance: MyString
+  balance_date: 2026-01-13 05:53:24
