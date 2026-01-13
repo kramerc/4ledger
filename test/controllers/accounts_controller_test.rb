@@ -20,7 +20,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create account" do
     assert_difference("Account.count") do
-      post accounts_url, params: { account: { kind: @account.kind, name: @account.name } }
+      post accounts_url, params: { account: { name: @account.name, kind: @account.kind, currency_id: @account.currency_id } }
     end
 
     assert_redirected_to account_url(Account.last)
@@ -37,13 +37,19 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update account" do
-    patch account_url(@account), params: { account: { kind: @account.kind, name: @account.name } }
+    patch account_url(@account), params: { account: { name: @account.name, kind: @account.kind, currency_id: @account.currency_id } }
     assert_redirected_to account_url(@account)
   end
 
   test "should destroy account" do
+    unused_account = Account.create!(
+      user: users(:one),
+      name: "Unused Account",
+      kind: "asset",
+      currency: currencies(:one)
+    )
     assert_difference("Account.count", -1) do
-      delete account_url(@account)
+      delete account_url(unused_account)
     end
 
     assert_redirected_to accounts_url

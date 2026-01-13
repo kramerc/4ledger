@@ -1,0 +1,12 @@
+<% content_for :title, "Editing currency" %>
+
+<h1>Editing currency</h1>
+
+<%= render "form", currency: @currency %>
+
+<br>
+
+<div>
+  <%= link_to "Show this currency", @currency %> |
+  <%= link_to "Back to currencies", currencies_path %>
+</div>

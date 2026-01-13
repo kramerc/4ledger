@@ -1,0 +1,42 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Transactions" %>
+
+<h1>Transactions</h1>
+
+<div id="transactions">
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Description</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Amount</th>
+        <th>Currency</th>
+        <th>Category</th>
+        <th>Cleared</th>
+        <th>Split</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @transactions.each do |transaction| %>
+        <tr>
+          <td><%= transaction.transacted_at&.strftime("%Y-%m-%d") %></td>
+          <td><%= transaction.description %></td>
+          <td><%= transaction.src_account&.name %></td>
+          <td><%= transaction.dest_account&.name %></td>
+          <td><%= number_to_currency(transaction.amount, unit: transaction.currency.symbol) %></td>
+          <td><%= transaction.currency.code %></td>
+          <td><%= transaction.category&.name %></td>
+          <td><%= transaction.cleared_at ? "✓" : "" %></td>
+          <td><%= transaction.split ? "Split" : "" %></td>
+          <td><%= link_to "Show", transaction %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to "New transaction", new_transaction_path %>

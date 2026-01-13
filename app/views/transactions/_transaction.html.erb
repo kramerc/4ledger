@@ -1,0 +1,52 @@
+<div id="<%= dom_id transaction %>">
+  <div>
+    <strong>Parent transaction:</strong>
+    <%= transaction.parent_transaction_id %>
+  </div>
+
+  <div>
+    <strong>Category:</strong>
+    <%= transaction.category_id %>
+  </div>
+
+  <div>
+    <strong>Src account:</strong>
+    <%= transaction.src_account_id %>
+  </div>
+
+  <div>
+    <strong>Dest account:</strong>
+    <%= transaction.dest_account_id %>
+  </div>
+
+  <div>
+    <strong>Description:</strong>
+    <%= transaction.description %>
+  </div>
+
+  <div>
+    <strong>Amount:</strong>
+    <%= transaction.amount %>
+  </div>
+
+  <div>
+    <strong>Fx amount:</strong>
+    <%= transaction.fx_amount %>
+  </div>
+
+  <div>
+    <strong>Fx currency:</strong>
+    <%= transaction.fx_currency %>
+  </div>
+
+  <div>
+    <strong>Notes:</strong>
+    <%= transaction.notes %>
+  </div>
+
+  <div>
+    <strong>Split:</strong>
+    <%= transaction.split %>
+  </div>
+
+</div>

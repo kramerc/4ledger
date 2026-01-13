@@ -10,7 +10,7 @@ class SimplefinRefreshJob < ApplicationJob
 
     connections.find_each do |simplefin_connection|
       simplefin_client = simplefin_connection.client
-      simplefin_accounts = simplefin_client.accounts
+      simplefin_accounts = simplefin_client.accounts(start_date: 1.month.ago.to_i)
 
       simplefin_accounts["errors"]&.any? && next
 
@@ -33,12 +33,13 @@ class SimplefinRefreshJob < ApplicationJob
             simplefin_account: sf_account,
             remote_id: sf_transaction_data["id"]
           )
-          sf_transaction.posted = sf_transaction_data["posted"] ? Time.at(sf_transaction_data["posted"]) : nil
+          sf_transaction.posted = sf_transaction_data["posted"]&.positive? ? Time.at(sf_transaction_data["posted"]) : nil
           sf_transaction.amount = sf_transaction_data["amount"]
           sf_transaction.description = sf_transaction_data["description"]
           sf_transaction.transacted_at = sf_transaction_data["transacted-at"] ? Time.at(sf_transaction_data["transacted-at"]) : nil
           sf_transaction.pending = sf_transaction_data["pending"]
           sf_transaction.extra = sf_transaction_data["extra"]
+          sf_transaction.synced_at = Time.current
           sf_transaction.save!
         end
       end

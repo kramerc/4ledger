@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts or /accounts.json
   def index
-    @accounts = Account.all
+    @accounts = current_user.accounts
   end
 
   # GET /accounts/1 or /accounts/1.json
@@ -13,7 +13,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/new
   def new
-    @account = Account.new
+    @account = current_user.accounts.build
   end
 
   # GET /accounts/1/edit
@@ -22,8 +22,8 @@ class AccountsController < ApplicationController
 
   # POST /accounts or /accounts.json
   def create
-    @account = Account.new(account_params)
-    @account.user = current_user
+    @account = current_user.accounts.build(account_params)
+    # TODO: Create opening balance transaction if needed
 
     respond_to do |format|
       if @account.save
@@ -62,11 +62,11 @@ class AccountsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
-      @account = Account.find(params.expect(:id))
+      @account = current_user.accounts.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.expect(account: [ :name, :kind ])
+      params.expect(account: [ :name, :kind, :currency_id ])
     end
 end

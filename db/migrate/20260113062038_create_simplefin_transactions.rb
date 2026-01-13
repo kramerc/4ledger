@@ -10,7 +10,11 @@ class CreateSimplefinTransactions < ActiveRecord::Migration[8.1]
       t.boolean :pending
       t.jsonb :extra
 
+      t.timestamp :synced_at
+
       t.timestamps
     end
+
+    add_index :simplefin_transactions, :synced_at
   end
 end

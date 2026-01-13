@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :currencies
+  resources :transactions
+  resources :categories
   devise_for :users
   resources :accounts
   resource :simplefin_connection, only: %i[new create show destroy]

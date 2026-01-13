@@ -1,0 +1,39 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  parent_transaction:
+  category: one
+  src_account: one
+  dest_account: one
+  description: Grocery Store
+  amount_minor: 5000
+  currency: one
+  fx_amount_minor:
+  fx_currency:
+  notes: Weekly groceries
+  split: false
+  transacted_at: <%= 2.days.ago %>
+  cleared_at: <%= 2.days.ago %>
+  reconciled_at:
+  synced_at:
+  opening_balance: false
+
+two:
+  user: one
+  parent_transaction:
+  category: one
+  src_account: one
+  dest_account: two
+  description: Salary Deposit
+  amount_minor: 250000
+  currency: one
+  fx_amount_minor:
+  fx_currency:
+  notes: Monthly salary
+  split: false
+  transacted_at: <%= 5.days.ago %>
+  cleared_at: <%= 5.days.ago %>
+  reconciled_at: <%= 4.days.ago %>
+  synced_at:
+  opening_balance: false

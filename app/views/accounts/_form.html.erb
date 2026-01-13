@@ -22,6 +22,11 @@
   </div>
 
   <div>
+    <%= form.label :currency_id, style: "display: block" %>
+    <%= form.select :currency_id, Currency.all.collect { |c| [c.code, c.id] } %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
