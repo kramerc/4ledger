@@ -1,4 +1,4 @@
-name: "four_ledger"
+name: "honeyledger"
 
 services:
   rails-app:
