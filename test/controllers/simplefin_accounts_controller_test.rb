@@ -77,11 +77,8 @@ class SimplefinAccountsControllerTest < ActionDispatch::IntegrationTest
     # Ensure the account is linked first
     assert_not_nil @simplefin_account.account
 
-    # Use stub_any_instance to simulate update failure on any SimplefinAccount instance
+    # Stub update to return false, simulating a failure
     SimplefinAccount.stub_any_instance :update, false do
-      # Add an error to make the error message more realistic
-      @simplefin_account.errors.add(:base, "Database error")
-      
       delete unlink_simplefin_account_url(@simplefin_account)
 
       assert_redirected_to simplefin_connection_url
