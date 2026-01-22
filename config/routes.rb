@@ -4,7 +4,16 @@ Rails.application.routes.draw do
   resources :categories
   devise_for :users
   resources :accounts
+
+  # SimpleFIN integration routes
+  resources :simplefin_accounts, only: [] do
+    member do
+      post :link
+      delete :unlink
+    end
+  end
   resource :simplefin_connection, only: %i[new create show destroy]
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

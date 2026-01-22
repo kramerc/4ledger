@@ -186,6 +186,7 @@ GEM
     minitest (6.0.1)
       prism (~> 1.5)
     minitest-mock (5.27.0)
+    minitest-stub_any_instance (1.0.3)
     msgpack (1.8.0)
     multi_xml (0.8.1)
       bigdecimal (>= 3.1, < 5)
@@ -424,6 +425,7 @@ DEPENDENCIES
   jbuilder
   kamal
   minitest-mock
+  minitest-stub_any_instance
   pg (~> 1.1)
   propshaft
   puma (>= 5.0)
@@ -508,6 +510,7 @@ CHECKSUMS
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   minitest (6.0.1) sha256=7854c74f48e2e975969062833adc4013f249a4b212f5e7b9d5c040bf838d54bb
   minitest-mock (5.27.0) sha256=7040ed7185417a966920987eaa6eaf1be4ea1fc5b25bb03ff4703f98564a55b0
+  minitest-stub_any_instance (1.0.3) sha256=d53ca295d173817f828789ac44ad3c2a4a0752166eea7a63c9ae026d9e7660e8
   msgpack (1.8.0) sha256=e64ce0212000d016809f5048b48eb3a65ffb169db22238fb4b72472fecb2d732
   multi_xml (0.8.1) sha256=addba0290bac34e9088bfe73dc4878530297a82a7bbd66cb44dcd0a4b86edf5a
   net-imap (0.6.2) sha256=08caacad486853c61676cca0c0c47df93db02abc4a8239a8b67eb0981428acc6

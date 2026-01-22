@@ -72,6 +72,7 @@ group :test do
 
   # Mock support for Minitest
   gem "minitest-mock"
+  gem "minitest-stub_any_instance"
 
   # Code coverage analysis
   gem "simplecov", require: false
