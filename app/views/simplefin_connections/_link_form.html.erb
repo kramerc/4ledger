@@ -1,7 +1,7 @@
 <% if sf_account.unlinked? %>
   <%= form_with model: sf_account, url: link_simplefin_account_path(sf_account), method: :post do |form| %>
     <span>
-      <%= form.collection_select :account_id, current_user.accounts.linkable.unlinked.order(:name), :id, :name, prompt: "Not linked" %>
+      <%= form.collection_select :account_id, current_user.accounts.linkable.unlinked.order(:name), :id, :name, { prompt: "Not linked" }, { "aria-label": "Account to link" } %>
     </span>
     <span>
       <%= form.submit "Link" %>
