@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  resources :currencies
   resources :accounts
   resources :categories
-  resources :currencies
   resources :transactions
 
   # SimpleFIN integration routes
