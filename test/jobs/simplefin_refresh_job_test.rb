@@ -157,7 +157,7 @@ class SimplefinRefreshJobTest < ActiveJob::TestCase
       end
     end
 
-    assert_match(/SimpleFin API error for connection #{@connection.id}: API Error/, log_output.string)
+    assert_match(/SimpleFin API error for connection #{@connection.id}: #{Regexp.escape("API Error")}/, log_output.string)
   end
 
   test "logs reauthentication error" do
@@ -175,7 +175,7 @@ class SimplefinRefreshJobTest < ActiveJob::TestCase
       end
     end
 
-    assert_match(/SimpleFin API error for connection #{@connection.id}: You must reauthenticate\./, log_output.string)
+    assert_match(/SimpleFin API error for connection #{@connection.id}: #{Regexp.escape("You must reauthenticate.")}/, log_output.string)
   end
 
   test "updates existing accounts and transactions" do
