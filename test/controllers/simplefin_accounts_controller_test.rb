@@ -1,4 +1,5 @@
 require "test_helper"
+require "minitest/stub_any_instance"
 
 class SimplefinAccountsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
@@ -76,24 +77,12 @@ class SimplefinAccountsControllerTest < ActionDispatch::IntegrationTest
     # Ensure the account is linked first
     assert_not_nil @simplefin_account.account
 
-    # Override the update method to simulate failure
-    SimplefinAccount.class_eval do
-      alias_method :original_update, :update
-      define_method(:update) do |*args|
-        errors.add(:base, "Database error")
-        false
-      end
-    end
+    # Stub update to return false, simulating a failure
+    SimplefinAccount.stub_any_instance :update, false do
+      delete unlink_simplefin_account_url(@simplefin_account)
 
-    delete unlink_simplefin_account_url(@simplefin_account)
-
-    assert_redirected_to simplefin_connection_url
-    assert_match(/Failed to unlink SimpleFIN account/, flash[:alert])
-  ensure
-    # Restore the original method
-    SimplefinAccount.class_eval do
-      alias_method :update, :original_update
-      remove_method :original_update
+      assert_redirected_to simplefin_connection_url
+      assert_match(/Failed to unlink SimpleFIN account/, flash[:alert])
     end
   end
 end
